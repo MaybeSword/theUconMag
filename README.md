@@ -1,2 +1,2 @@
 # theUconMag
-UConn's Premier Satire magazine 
+We are UConn's Premiere Satire magazine
