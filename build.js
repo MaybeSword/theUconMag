@@ -85,6 +85,9 @@ async function build() {
   // prevent Jekyll processing
   fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
 
+  // custom domain
+  fs.writeFileSync(path.join(OUT, 'CNAME'), 'theucon.com');
+
   const articles = getArticles();
 
   // index
