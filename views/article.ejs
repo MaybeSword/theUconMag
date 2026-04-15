@@ -1,18 +1,18 @@
 <%- include('partials/header', { pageTitle: title }) %>
 
-<% if (cover) { %>
-<div class="article-hero-wrap">
-  <img class="article-hero-img" src="<%= cover %>" alt="<%= title %>">
-  <div class="article-hero-fade"></div>
-</div>
-<% } %>
-
-<div class="article-container">
-  <header class="article-header">
+<div class="article-header-band">
+  <% if (cover) { %>
+    <img class="article-hero-img" src="<%= cover %>" alt="<%= title %>">
+    <div class="article-hero-overlay"></div>
+  <% } %>
+  <div class="article-header-content">
     <span class="tag"><%= category %></span>
     <h1 class="article-title"><%= title %></h1>
     <p class="article-meta">Published <%= dateStr %> &nbsp;·&nbsp; The UConn Mag</p>
-  </header>
+  </div>
+</div>
+
+<div class="article-container">
 
   <div class="article-body">
     <%- content %>
