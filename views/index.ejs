@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<% if (articles.length > 0) { %>
+<div class="section-divider">
+  <span>Latest Stories</span>
+</div>
+
+<div class="articles-grid">
+  <% articles.forEach(article => { %>
+  <article class="article-card">
+    <a href="/article/<%= article.slug %>" class="card-img-link">
+      <div class="card-img-wrap">
+        <% if (article.cover) { %>
+          <img class="card-img" src="<%= article.cover %>" alt="<%= article.title %>" loading="lazy">
+        <% } else { %>
+          <div class="card-no-img">
+            <span class="card-no-img-label">Image coming soon</span>
+          </div>
+        <% } %>
+      </div>
+    </a>
+    <span class="card-tag"><%= article.category %></span>
+    <h2 class="card-title"><a href="/article/<%= article.slug %>"><%= article.title %></a></h2>
+    <% if (article.excerpt) { %>
+      <p class="card-excerpt"><%= article.excerpt %></p>
+    <% } %>
+    <span class="card-meta"><%= article.dateStr %></span>
+  </article>
+  <% }) %>
+</div>
+<% } else { %>
+<div class="empty-state">
+  <p>No stories yet. Drop a folder into <code>/articles</code> to get started.</p>
+</div>
+<% } %>
+
+<%- include('partials/footer') %>

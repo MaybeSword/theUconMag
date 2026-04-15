@@ -1,0 +1,16 @@
+{
+  "name": "uconn-mag",
+  "version": "1.0.0",
+  "description": "UConn's Premier Satire Magazine",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "npx nodemon server.js",
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9",
+    "marked": "^9.1.6"
+  }
+}

@@ -1,0 +1,49 @@
+<%- include('partials/header', { pageTitle: title }) %>
+
+<% if (cover) { %>
+<div class="article-hero-wrap">
+  <img class="article-hero-img" src="<%= cover %>" alt="<%= title %>">
+  <div class="article-hero-fade"></div>
+</div>
+<% } %>
+
+<div class="article-container">
+  <header class="article-header">
+    <span class="tag"><%= category %></span>
+    <h1 class="article-title"><%= title %></h1>
+    <p class="article-meta">Published <%= dateStr %> &nbsp;·&nbsp; The UConn Mag</p>
+  </header>
+
+  <div class="article-body">
+    <%- content %>
+  </div>
+
+  <% if (related.length > 0) { %>
+  <aside class="related-section">
+    <h3 class="related-heading">More Stories</h3>
+    <div class="related-grid">
+      <% related.forEach(r => { %>
+      <a href="/article/<%= r.slug %>" class="related-card">
+        <div class="related-card-img">
+          <% if (r.cover) { %>
+            <img src="<%= r.cover %>" alt="<%= r.title %>">
+          <% } else { %>
+            <div class="related-card-placeholder"></div>
+          <% } %>
+        </div>
+        <div>
+          <span class="card-tag"><%= r.category %></span>
+          <p class="related-card-title"><%= r.title %></p>
+        </div>
+      </a>
+      <% }) %>
+    </div>
+  </aside>
+  <% } %>
+
+  <div class="article-back">
+    <a href="/" class="btn-outline btn-sm">&larr; All Stories</a>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
