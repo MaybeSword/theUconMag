@@ -7,7 +7,7 @@ const OUT         = path.join(__dirname, 'docs');
 const ARTICLES_DIR = path.join(__dirname, 'articles');
 const PUBLIC_DIR  = path.join(__dirname, 'public');
 const VIEWS_DIR   = path.join(__dirname, 'views');
-const COVER_EXTS  = ['jpg', 'jpeg', 'png', 'webp'];
+const COVER_EXTS  = new Set(['jpg', 'jpeg', 'png', 'webp']);
 
 // ── helpers (mirrors server.js) ───────────────────────────────────────────────
 
@@ -16,11 +16,11 @@ function readFile(fp) {
 }
 
 function findCover(dir, slug) {
-  for (const ext of COVER_EXTS) {
-    if (fs.existsSync(path.join(dir, `cover.${ext}`)))
-      return `/articles/${slug}/cover.${ext}`;
-  }
-  return null;
+  const file = fs.readdirSync(dir).find(f => {
+    const ext = f.split('.').pop().toLowerCase();
+    return COVER_EXTS.has(ext);
+  });
+  return file ? `/articles/${slug}/${file}` : null;
 }
 
 function getExcerpt(mdPath) {

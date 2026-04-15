@@ -6,7 +6,7 @@ const { marked } = require('marked');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ARTICLES_DIR = path.join(__dirname, 'articles');
-const COVER_EXTS = ['jpg', 'jpeg', 'png', 'webp'];
+const COVER_EXTS = new Set(['jpg', 'jpeg', 'png', 'webp']);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -20,12 +20,11 @@ function readFile(filePath) {
 }
 
 function findCover(dir, slug) {
-  for (const ext of COVER_EXTS) {
-    if (fs.existsSync(path.join(dir, `cover.${ext}`))) {
-      return `/articles/${slug}/cover.${ext}`;
-    }
-  }
-  return null;
+  const file = fs.readdirSync(dir).find(f => {
+    const ext = f.split('.').pop().toLowerCase();
+    return COVER_EXTS.has(ext);
+  });
+  return file ? `/articles/${slug}/${file}` : null;
 }
 
 function getExcerpt(mdPath) {
